@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>RM & Florentino | Estudio de Diseño</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome 6 (iconos para redes sociales) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ESTILOS ORIGINALES CON TU DEGRADADO */
+        body {
+            background: radial-gradient(circle at top, #f7ff8b67, #ff949475);
+            font-family: sans-serif;
+        }
+
+        .card {
+            background: #fdd06e;
+            border: 3px solid black;
+            border-radius: 20px;
+            box-shadow: 6px 6px 0px #000;
+            transition: 0.2s;
+        }
+
+        .card:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 10px 10px 0px #000;
+        }
+
+        .title-sticker {
+            background: #76ffbf98;
+            display: inline-block;
+            padding: 6px 14px;
+            border: 2px solid black;
+            border-radius: 12px;
+            box-shadow: 3px 3px 0px #000;
+        }
+
+        .btn-sticker {
+            background: #ff2d55;
+            color: white;
+            padding: 10px 20px;
+            border: 2px solid black;
+            border-radius: 12px;
+            box-shadow: 4px 4px 0px black;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: bold;
+        }
+
+        .btn-sticker:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px black;
+        }
+
+        /* Tarjetas de servicio - estilo pantone RECTAS (sin rotación) */
+        .service-card {
+            background: #ffffff;
+            border: 3px solid black;
+            border-radius: 20px;
+            box-shadow: 6px 6px 0px #000;
+            transition: 0.2s;
+        }
+
+        .service-card:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 10px 10px 0px #000;
+        }
+
+        /* Sliders */
+        .slider-container {
+            max-width: 1800px;
+            height: 500px;
+            margin: auto;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+
+        .slider {
+            display: flex;
+            width: 100%;
+            animation: slide 15s ease-in-out infinite;
+        }
+
+        .slide {
+            width: 100%;
+            height: 500px;
+            flex-shrink: 0;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @keyframes slide {
+            0%   { transform: translateX(0); }
+            40%  { transform: translateX(0); }
+            50%  { transform: translateX(-100%); }
+            90%  { transform: translateX(-100%); }
+            100% { transform: translateX(0); }
+        }
+
+        @keyframes miniSlide {
+            0%   { transform: translateX(0); }
+            48%  { transform: translateX(0); }
+            52%  { transform: translateX(-100%); }
+            98%  { transform: translateX(-100%); }
+            100% { transform: translateX(0); }
+        }
+
+        .mini-slide {
+            min-width: 100%;
+            height: 250px;
+        }
+
+        .grid-dual {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 40px auto;
+        }
+
+        .mini-slider-container {
+            height: 250px;
+            overflow: hidden;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .mini-slider {
+            display: flex;
+            width: 200%;
+            animation: miniSlide 20s ease-in-out infinite;
+        }
+
+        .static-box {
+            height: 250px;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .static-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @keyframes slideVertical {
+            0%   { transform: translateY(0); }
+            25%  { transform: translateY(0); }
+            33%  { transform: translateY(-100%); }
+            58%  { transform: translateY(-100%); }
+            66%  { transform: translateY(-200%); }
+            91%  { transform: translateY(-200%); }
+            100% { transform: translateY(0); }
+        }
+
+        .noticias-container {
+            width: 550px;
+            height: 700px;
+            margin: 80px auto;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+
+        .noticias-slider {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            animation: slideVertical 24s ease-in-out infinite;
+        }
+
+        .noticia {
+            width: 100%;
+            height: 700px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .noticia img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        header {
+            backdrop-filter: blur(10px);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        section {
+            scroll-margin-top: 120px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            header div {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .slider-container {
+                height: 250px;
+            }
+
+            .slide {
+                height: 250px;
+            }
+
+            p.text-2xl {
+                font-size: 18px;
+                padding: 0 10px;
+            }
+
+            .grid.md\:grid-cols-2 {
+                grid-template-columns: 1fr !important;
+            }
+
+            .flex.items-center.justify-center {
+                flex-direction: column;
+            }
+
+            .noticias-container {
+                width: 90%;
+                height: 300px;
+            }
+
+            .noticia {
+                height: 300px;
+            }
+
+            #portfolioSlider img {
+                height: 250px;
+            }
+
+            .grid-dual {
+                grid-template-columns: 1fr;
+            }
+
+            footer .grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                text-align: center;
+            }
+        }
+
+        /* ========= ESTILOS PARA EL CHAT BOT (RMIND) ========= */
+        .rmind-chat-button {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 64px;
+            height: 64px;
+            border-radius: 32px;
+            background: #ff2d55;
+            border: 2px solid #000;
+            box-shadow: 4px 4px 0 #000;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            z-index: 1000;
+            font-size: 28px;
+            color: white;
+        }
+        .rmind-chat-button:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 8px 8px 0 #000;
+        }
+        .rmind-chat-window {
+            position: fixed;
+            bottom: 100px;
+            right: 24px;
+            width: 380px;
+            height: 550px;
+            background: white;
+            border-radius: 24px;
+            border: 3px solid #000;
+            box-shadow: 8px 8px 0 rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 1001;
+            font-family: sans-serif;
+        }
+        .rmind-chat-header {
+            background: #ff2d55;
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border-bottom: 2px solid #000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .rmind-chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+            background: #fef9e6;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .rmind-message {
+            max-width: 85%;
+            padding: 10px 14px;
+            border-radius: 18px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            border: 1px solid #000;
+        }
+        .rmind-message.user {
+            background: #ff2d55;
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+        .rmind-message.bot {
+            background: white;
+            color: #1e293b;
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+            box-shadow: 2px 2px 0 #00000020;
+        }
+        .rmind-typing {
+            background: #e2e8f0;
+            color: #475569;
+            font-style: italic;
+            padding: 10px 14px;
+            border-radius: 18px;
+            align-self: flex-start;
+        }
+        .rmind-chat-input-area {
+            display: flex;
+            border-top: 2px solid #000;
+            background: white;
+        }
+        .rmind-chat-input {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            outline: none;
+            font-size: 0.9rem;
+            font-family: sans-serif;
+        }
+        .rmind-chat-send {
+            background: #ff2d55;
+            color: white;
+            border: none;
+            border-left: 2px solid #000;
+            padding: 0 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .rmind-chat-send:active {
+            background: #cc1f44;
+        }
+        @media (max-width: 480px) {
+            .rmind-chat-window {
+                width: calc(100% - 40px);
+                right: 20px;
+                left: 20px;
+                bottom: 90px;
+                height: 500px;
+            }
+        }
+    </style>
+</head>
+
+<body class="text-black text-center m-0 p-0 min-h-screen flex flex-col">
+
+    <header id="mainHeader" class="fixed top-0 left-0 w-full z-50 transition-transform duration-300 bg-[#FFF2AE]">
+        <div class="flex items-center justify-between px-6 py-4">
+            <div class="flex items-center gap-3">
+                <img src="img/logo.png" class="w-12 md:w-14" alt="Logo">
+                <h1 class="font-semibold text-black text-2xl md:text-xl">Estudio de Diseño</h1>
+            </div>
+            <h2 class="text-black text-lg md:text-4xl font-bold tracking-wide text-center">RM & Florentino</h2>
+            <nav class="hidden md:flex gap-6 text-2xl text-black font-bold">
+                <a href="#servicios" class="hover:text-green-400">Servicios</a>
+                <a href="#portafolio" class="hover:text-green-400">Portafolio</a>
+                <a href="#contacto" class="hover:text-green-400">Contacto</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <section class="pt-32 pb-20">
+            <div class="slider-container">
+                <div class="slider">
+                    <div class="slide"><img src="img/principal1.png" alt="Principal 1"></div>
+                    <div class="slide"><img src="img/principal2.png" alt="Principal 2"></div>
+                </div>
+            </div>
+        </section>
+
+        <p class="text-2xl md:text-4xl font-semibold mt-6">Diseño Gráfico | Impresión | Publicidad | Marketing</p>
+
+        <section class="py-28 max-w-5xl mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-10">RM & Florentino</h2>
+            <div class="grid md:grid-cols-2 gap-8 text-justify text-lg md:text-xl text-gray-800 font-medium">
+                <p>En RM & Florentino Estudio de Diseño nos especializamos en transformar ideas en identidad visual. Nuestro enfoque combina creatividad, estrategia y detalle para desarrollar proyectos que conecten con las personas y generen impacto.</p>
+                <p>Desde diseño gráfico y marketing hasta impresión en distintos formatos, trabajamos cada proyecto con pasión y compromiso, cuidando cada elemento para ofrecer resultados profesionales y auténticos.</p>
+            </div>
+        </section>
+
+        <div class="flex items-center justify-center gap-10 max-w-6xl mx-auto mt-20">
+            <div class="max-w-sm">
+                <h2 class="text-3xl font-bold mb-4">Cosas nuevas en el estudio</h2>
+                <p class="text-lg font-medium">Descubre los últimos trabajos, ideas y proyectos que estamos creando.</p>
+            </div>
+            <div class="noticias-container">
+                <div class="noticias-slider">
+                    <div class="noticia"><img src="img/NOTICIAS11.png" alt="Noticia 1"></div>
+                    <div class="noticia"><img src="img/noticias2.png" alt="Noticia 2"></div>
+                    <div class="noticia"><img src="img/noticias3.png" alt="Noticia 3"></div>
+                </div>
+            </div>
+        </div>
+
+        <section id="portafolio" class="py-28">
+            <h2 class="text-4xl font-bold text-center mb-10">Portafolio</h2>
+            <div class="relative max-w-3xl mx-auto overflow-hidden">
+                <div id="portfolioSlider" class="flex transition-transform duration-500">
+                    <img src="img/portafolio1.png" class="w-full h-[500px] object-cover flex-shrink-0 rounded-lg">
+                    <img src="img/portafolio2.png" class="w-full h-[500px] object-cover flex-shrink-0 rounded-lg">
+                    <img src="img/portafolio3.png" class="w-full h-[500px] object-cover flex-shrink-0 rounded-lg">
+                    <img src="img/portafolio4.png" class="w-full h-[500px] object-cover flex-shrink-0 rounded-lg">
+                    <img src="img/portafolio5.png" class="w-full h-[500px] object-cover flex-shrink-0 rounded-lg">
+                    <img src="img/portafolio6.png" class="w-full h-[500px] object-cover flex-shrink-0 rounded-lg">
+                </div>
+                <button onclick="moveSlide(-1)" class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black text-white px-3 py-2 rounded-full">◀</button>
+                <button onclick="moveSlide(1)" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black text-white px-3 py-2 rounded-full">▶</button>
+            </div>
+        </section>
+
+        <section id="servicios" class="py-28">
+            <h2 class="text-4xl font-bold text-center mb-10">Catálogo de Servicios</h2>
+            <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-6 px-4">
+                <a href="Disen-grafico.html"><div class="service-card bg-white p-8 rounded-2xl shadow hover:scale-105 transition text-center"><h3 class="text-2xl font-bold">Diseño Gráfico</h3></div></a>
+                <a href="C-M.html"><div class="service-card bg-white p-8 rounded-2xl shadow hover:scale-105 transition text-center"><h3 class="text-2xl font-bold">Community Management</h3></div></a>
+                <a href="Imp-gran-formato.html"><div class="service-card bg-white p-8 rounded-2xl shadow hover:scale-105 transition text-center"><h3 class="text-2xl font-bold">Impresión en Gran Formato</h3></div></a>
+                <a href="imp-uv.html"><div class="service-card bg-white p-8 rounded-2xl shadow hover:scale-105 transition text-center"><h3 class="text-2xl font-bold">Impresión UV en Rígidos</h3></div></a>
+                <a href="Offset.html"><div class="service-card bg-white p-8 rounded-2xl shadow hover:scale-105 transition text-center"><h3 class="text-2xl font-bold">Offset</h3></div></a>
+                <a href="ipm-dg.html"><div class="service-card bg-white p-8 rounded-2xl shadow hover:scale-105 transition text-center"><h3 class="text-2xl font-bold">Impresión Digital</h3></div></a>
+                <a href="cv.html"><div class="service-card bg-white p-8 rounded-2xl shadow hover:scale-105 transition text-center"><h3 class="text-2xl font-bold">Cortes de Vinil</h3></div></a>
+                <a href="3d.html"><div class="service-card bg-white p-8 rounded-2xl shadow hover:scale-105 transition text-center"><h3 class="text-2xl font-bold">Impresión 3D</h3></div></a>
+            </div>
+        </section>
+
+        <section class="py-28 text-center">
+            <h2 class="text-4xl font-bold mb-10">Conoce nuestra línea creativa</h2>
+            <div class="grid-dual">
+                <a href="bruma-umbral.html"><div class="mini-slider-container"><div class="mini-slider"><div class="mini-slide"><img src="img/Brumad1.png"></div><div class="mini-slide"><img src="img/Umbrald1.png"></div></div></div></a>
+                <div class="static-box"><img src="img/infod.png"></div>
+            </div>
+        </section>
+
+        <section id="contacto" class="text-center py-10 text-black">
+            <h3 class="mb-6 text-3xl font-semibold mt-6">¿Ya nos sigues en nuestras redes sociales?</h3>
+            <div class="flex justify-center gap-4 flex-wrap">
+                <a href="https://www.facebook.com/rmyflor" target="_blank" class="btn-sticker"><i class="fab fa-facebook"></i> Facebook</a>
+                <a href="https://www.instagram.com/rm_yflorentino/?hl=es" target="_blank" class="btn-sticker"><i class="fab fa-instagram"></i> Instagram</a>
+                <a href="https://www.tiktok.com/@rm_yflorentino" target="_blank" class="btn-sticker"><i class="fab fa-tiktok"></i> TikTok</a>
+            </div>
+        </section>
+
+        <div class="text-center my-10">
+            <a href="https://whatsapp.com/channel/0029Vb7dS9j5fM5g1Vo0a32X" target="_blank" class="btn-sticker inline-block mb-4"><i class="fab fa-whatsapp"></i> Únete a nuestro canal de difusión</a><br>
+            <a href="https://wa.me/5564254139" target="_blank" class="btn-sticker inline-block"><i class="fab fa-whatsapp"></i> Cotizar por WhatsApp</a>
+        </div>
+    </main>
+
+    <footer class="text-white py-16 mt-auto bg-[#E57373]">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-16 text-left">
+                <div class="max-w-xs"><h3 class="font-bold text-lg mb-6">Servicios</h3><ul class="space-y-3 text-gray-300 font-medium"><li><a href="#" class="hover:text-green-400">Diseño gráfico</a></li><li><a href="#" class="hover:text-green-400">Impresión</a></li><li><a href="#" class="hover:text-green-400">Marketing</a></li></ul></div>
+                <div class="max-w-xs"><h3 class="font-bold text-lg mb-6">Productos</h3><ul class="space-y-3 text-gray-300 font-medium"><li><a href="#" class="hover:text-green-400">Stickers</a></li><li><a href="#" class="hover:text-green-400">Lonas</a></li><li><a href="#" class="hover:text-green-400">3D</a></li></ul></div>
+                <div class="max-w-xs"><h3 class="font-bold text-lg mb-6">Ubicación</h3><a href="https://www.google.com/maps/place/RM+y+Florentino/@19.4072487,-99.0357438,17z" target="_blank" class="text-gray-300 hover:text-green-400 transition block underline font-medium">Lago Guija 53<br>Pirules, Nezahualcoyotl</a></div>
+                <div class="max-w-xs"><h3 class="font-bold text-lg mb-6">Envíos</h3><p class="text-gray-300 leading-relaxed font-medium">Realizamos envíos locales y nacionales</p></div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let currentIndex = 0;
+        function moveSlide(direction) {
+            const slider = document.getElementById("portfolioSlider");
+            const totalSlides = slider.children.length;
+            currentIndex += direction;
+            if (currentIndex < 0) currentIndex = totalSlides - 1;
+            if (currentIndex >= totalSlides) currentIndex = 0;
+            slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        let lastScroll = 0;
+        const header = document.getElementById("mainHeader");
+        window.addEventListener("scroll", () => {
+            let currentScroll = window.pageYOffset;
+            if (currentScroll > lastScroll && currentScroll > 100) header.style.transform = "translateY(-100%)";
+            else header.style.transform = "translateY(0)";
+            lastScroll = currentScroll;
+        });
+
+        // ========== CHAT RMIND CON TIMEOUT AUMENTADO (10 MINUTOS) ==========
+        (function() {
+            const CONFIG = {
+                apiUrl: "http://localhost:5000",
+                apiKey: "key_admin_adrian_123",
+                botName: "RMIND Asistente",
+                welcomeMessage: "¡Hola! Soy RMIND. ¿En qué te ayudo? Puedo buscar información en internet para ti."
+            };
+
+            // Crear botón flotante
+            const chatButton = document.createElement('div');
+            chatButton.className = 'rmind-chat-button';
+            chatButton.innerHTML = '<i class="fas fa-comment-dots"></i>';
+            document.body.appendChild(chatButton);
+
+            // Crear ventana del chat
+            const chatWindow = document.createElement('div');
+            chatWindow.className = 'rmind-chat-window';
+            chatWindow.style.display = 'none';
+            chatWindow.innerHTML = `
+                <div class="rmind-chat-header">
+                    <span><i class="fas fa-robot"></i> ${CONFIG.botName}</span>
+                    <button id="rmindCloseChat" style="background:none; border:none; color:white; font-size:1.4rem; cursor:pointer;">&times;</button>
+                </div>
+                <div id="rmindMessages" class="rmind-chat-messages">
+                    <div class="rmind-message bot">${CONFIG.welcomeMessage}</div>
+                </div>
+                <div class="rmind-chat-input-area">
+                    <input type="text" id="rmindInput" class="rmind-chat-input" placeholder="Escribe tu mensaje...">
+                    <button id="rmindSendBtn" class="rmind-chat-send"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            `;
+            document.body.appendChild(chatWindow);
+
+            const messagesContainer = document.getElementById('rmindMessages');
+            const inputField = document.getElementById('rmindInput');
+            const sendBtn = document.getElementById('rmindSendBtn');
+
+            // Abrir/cerrar chat
+            chatButton.addEventListener('click', () => {
+                chatWindow.style.display = chatWindow.style.display === 'none' ? 'flex' : 'none';
+                if (chatWindow.style.display === 'flex') inputField.focus();
+            });
+            document.getElementById('rmindCloseChat').addEventListener('click', () => {
+                chatWindow.style.display = 'none';
+            });
+
+            function addMessage(text, isUser = false) {
+                const msgDiv = document.createElement('div');
+                msgDiv.className = `rmind-message ${isUser ? 'user' : 'bot'}`;
+                msgDiv.innerHTML = text.replace(/\n/g, '<br>');
+                messagesContainer.appendChild(msgDiv);
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }
+
+            function showTyping() {
+                const typingDiv = document.createElement('div');
+                typingDiv.className = 'rmind-typing';
+                typingDiv.id = 'rmindTyping';
+                typingDiv.innerHTML = '<i class="fas fa-ellipsis-h"></i> RMIND está pensando... (esto puede tomar unos minutos)';
+                messagesContainer.appendChild(typingDiv);
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }
+
+            function removeTyping() {
+                const typing = document.getElementById('rmindTyping');
+                if (typing) typing.remove();
+            }
+
+            // ✅ FUNCIÓN CON TIMEOUT DE 10 MINUTOS (600,000 ms)
+            async function sendToRMIND(query) {
+                // Crear un controlador de timeout de 10 minutos
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 600000); // 10 minutos = 600,000 ms
+
+                try {
+                    const response = await fetch(`${CONFIG.apiUrl}/preguntar`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-API-Key': CONFIG.apiKey
+                        },
+                        body: JSON.stringify({ mensaje: query }),
+                        signal: controller.signal
+                    });
+                    
+                    clearTimeout(timeoutId);
+                    
+                    if (!response.ok) throw new Error('Error en la respuesta del servidor');
+                    const data = await response.json();
+                    return data.respuesta || "Lo siento, no pude procesar tu consulta.";
+                } catch (error) {
+                    clearTimeout(timeoutId);
+                    if (error.name === 'AbortError') {
+                        return "⏰ La consulta está tomando más tiempo de lo habitual. Por favor, intenta dividirla en preguntas más pequeñas o espera un momento.";
+                    }
+                    console.error("Error conectando con RMIND:", error);
+                    return "⚠️ No pude conectar con el asistente. ¿Está corriendo el servidor local en http://localhost:5000?";
+                }
+            }
+
+            async function handleSend() {
+                const text = inputField.value.trim();
+                if (!text) return;
+                addMessage(text, true);
+                inputField.value = '';
+                showTyping();
+                const reply = await sendToRMIND(text);
+                removeTyping();
+                addMessage(reply, false);
+            }
+
+            sendBtn.addEventListener('click', handleSend);
+            inputField.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') handleSend();
+            });
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,633 @@
+<HTML>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>RM & Florentino</title>
+    <style>
+  body {
+    background: radial-gradient(circle at top,#f7ff8b67, #ff949475);
+    font-family: sans-serif;
+  }
+
+  .card {
+    background: #fdd06e;
+    border: 3px solid black;
+    border-radius: 20px;
+    box-shadow: 6px 6px 0px #000;
+    transition: 0.2s;
+  }
+
+  .card:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 10px 10px 0px #000;
+  }
+
+  .title-sticker {
+    background: #76ffbf98;
+    display: inline-block;
+    padding: 6px 14px;
+    border: 2px solid black;
+    border-radius: 12px;
+    box-shadow: 3px 3px 0px #000;
+  }
+
+  .btn-sticker {
+    background: #ff2d55;
+    color: white;
+    padding: 10px 20px;
+    border: 2px solid black;
+    border-radius: 12px;
+    box-shadow: 4px 4px 0px black;
+    transition: 0.2s;
+  }
+
+  .btn-sticker:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px black;
+  }
+  .card {
+  background: #ffffff;
+  border: 3px solid black;
+  border-radius: 20px;
+  box-shadow: 6px 6px 0px #000;
+  transition: 0.2s;
+  transform: rotate(-1deg);
+}
+
+@keyframes slide {
+  0%   { transform: translateX(0); }
+  40%  { transform: translateX(0); }
+
+  50%  { transform: translateX(-100%); }
+  90%  { transform: translateX(-100%); }
+
+  100% { transform: translateX(0); }
+}
+
+.slider-container {
+  max-width: 1800px;
+  height: 500px;
+  margin: auto;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.slider {
+  display: flex;
+  width: 100%;
+  animation: slide 15s ease-in-out infinite;
+}
+
+.slide {
+  width: 100%;
+  height: 500px;
+  flex-shrink: 0;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+@keyframes miniSlide {
+  0%   { transform: translateX(0); }
+  48%  { transform: translateX(0); }
+
+  52%  { transform: translateX(-100%); }
+  98%  { transform: translateX(-100%); }
+
+  100% { transform: translateX(0); }
+}
+
+.mini-slide {
+  min-width: 100%;
+  height: 250px;
+}
+
+.grid-dual {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 40px auto;
+}
+
+.mini-slider-container {
+  height: 250px;
+  overflow: hidden;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.mini-slider {
+  display: flex;
+  width: 200%;
+  animation: miniSlide 20s ease-in-out infinite;
+}
+
+.static-box {
+  height: 250px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.static-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@keyframes slideVertical {
+  0%   { transform: translateY(0); }
+  25%  { transform: translateY(0); }
+
+  33%  { transform: translateY(-100%); }
+  58%  { transform: translateY(-100%); }
+
+  66%  { transform: translateY(-200%); }
+  91%  { transform: translateY(-200%); }
+
+  100% { transform: translateY(0); }
+}
+
+.noticias-container {
+  width: 550px;
+  height: 700px;
+  margin: 80px auto; 
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.noticias-slider {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  animation: slideVertical 24s ease-in-out infinite;
+}
+
+.noticia {
+  width: 100%;
+  height: 700px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.noticia img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+header {
+  backdrop-filter: blur(10px);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+section {
+  scroll-margin-top: 120px;
+}
+
+/* ========================= */
+/* 📱 RESPONSIVE (SOLO CELULAR) */
+/* ========================= */
+
+@media (max-width: 768px) {
+
+  /* HEADER */
+  header div {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  nav {
+    display: none; /* ocultamos menú en celular */
+  }
+
+  /* SLIDER PRINCIPAL */
+  .slider-container {
+    height: 250px;
+  }
+
+  .slide {
+    height: 250px;
+  }
+
+  /* TEXTO PRINCIPAL */
+  p.text-2xl {
+    font-size: 18px;
+    padding: 0 10px;
+  }
+
+  /* PRESENTACIÓN */
+  .grid.md\\:grid-cols-2 {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* NOTICIAS */
+  .flex.items-center.justify-center {
+    flex-direction: column;
+  }
+
+  .noticias-container {
+    width: 90%;
+    height: 300px;
+  }
+
+  .noticia {
+    height: 300px;
+  }
+
+  /* PORTAFOLIO */
+  #portfolioSlider img {
+    height: 250px;
+  }
+
+  /* CATÁLOGO */
+  .grid.md\\:grid-cols-2 {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* DOBLE SECCIÓN */
+  .grid-dual {
+    grid-template-columns: 1fr;
+  }
+
+  /* FOOTER */
+  footer .grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    text-align: center;
+  }
+
+}
+</style>
+
+    <!--Diseño automatico-->
+    <script
+    src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-white text-Black text-center m-0 p-0 min-h-screen flex flex-col">
+    <header id="mainHeader" class="fixed top-0 left-0 w-full z-50 transition-transform duration-300 bg-[#FFF2AE]">
+
+  <div class="flex items-center justify-between px-6 py-4">
+
+    <!-- IZQUIERDA -->
+    <div class="flex items-center gap-3">
+      <img src="img/logo.png" class="w-12 md:w-14">
+      <h1 class="font-semibold text-Black text-2xl md:text-xl">
+        Estudio de Diseño
+      </h1>
+    </div>
+
+    <!-- CENTRO -->
+    <h2 class="text-Black text-lg md:text-4xl font-bold tracking-wide text-center">
+      RM & Florentino
+    </h2>
+
+    <!-- DERECHA -->
+    <nav class="hidden md:flex gap-6 text-2xl text-Black">
+      <a href="#servicios" class="hover:text-green-400">Servicios</a>
+      <a href="#portafolio" class="hover:text-green-400">Portafolio</a>
+      <a href="#contacto" class="hover:text-green-400">Contacto</a>
+    </nav>
+
+  </div>
+
+</header>
+
+<main class="flex-grow">
+
+<section class="pt-32 pb-20">
+<div class="slider-container">
+  <div class="slider">
+
+    <div class="slide">
+      <img src="img/principal1.png">
+    </div>
+
+    <div class="slide">
+      <img src="img/principal2.png">
+    </div>
+
+  </div>
+</div>
+</section>
+
+<!--Titulo-->
+<p class="text-2xl md:text-4xl font-semibold mt-6">
+    Diseño Gráfico | Impresión | Publicidad | Marketing  
+</p>
+
+<!--Presentacion-->
+<section class="py-28 max-w-5xl mx-auto px-6">
+
+  <h2 class="text-4xl font-bold text-center mb-10">
+    RM & Florentino
+  </h2>
+
+  <div class="grid md:grid-cols-2 gap-8 text-justify text-lg md:text-xl text-gray-800">
+
+    <p>
+      En RM & Florentino Estudio de Diseño nos especializamos en transformar ideas en identidad visual.
+      Nuestro enfoque combina creatividad, estrategia y detalle para desarrollar proyectos que conecten
+      con las personas y generen impacto.
+    </p>
+
+    <p>
+      Desde diseño gráfico y marketing hasta impresión en distintos formatos, trabajamos cada proyecto
+      con pasión y compromiso, cuidando cada elemento para ofrecer resultados profesionales y auténticos.
+    </p>
+
+  </div>
+
+</section>
+    
+    <!--slide noticias-->
+    <div class="flex items-center justify-center gap-10 max-w-6xl mx-auto mt-20">
+
+  <!-- TEXTO -->
+  <div class="max-w-sm">
+    <h2 class="text-3xl font-bold mb-4">
+      Cosas nuevas en el estudio
+    </h2>
+    <p class="text-lg">
+      Descubre los últimos trabajos, ideas y proyectos que estamos creando.
+    </p>
+  </div>
+
+    <div class="noticias-container">
+  <div class="noticias-slider">
+
+    <div class="noticia">
+      <img src="img/NOTICIAS11.png">
+    </div>
+
+    <div class="noticia">
+      <img src="img/noticias2.png">
+    </div>
+
+    <div class="noticia">
+      <img src="img/noticias3.png">
+    </div>
+
+  </div>
+</div>
+    </div>
+
+<!--Portafolio-->
+<section id="portafolio" class="py-28">
+    <h2 class="text-4xl font-bold text-center mb-10">
+     Portafolio</h2>
+
+     <div class="relative max-w-3xl mx-auto overflow-hidden">
+
+  <div id="portfolioSlider" class="flex transition-transform duration-500">
+
+    <img src="img/portafolio1.png" class="w-full h-[500px] object-cover flex-shrink-0 rounded-lg">
+    <img src="img/portafolio2.png" class="w-full h-[500px] object-cover flex-shrink-0 rounded-lg">
+    <img src="img/portafolio3.png" class="w-full h-[500px] object-cover flex-shrink-0 rounded-lg">
+    <img src="img/portafolio4.png" class="w-full h-[500px] object-cover flex-shrink-0 rounded-lg">
+    <img src="img/portafolio5.png" class="w-full h-[500px] object-cover flex-shrink-0 rounded-lg">
+    <img src="img/portafolio6.png" class="w-full h-[500px] object-cover flex-shrink-0 rounded-lg">
+
+  </div>
+
+  <!-- BOTÓN IZQUIERDA -->
+  <button onclick="moveSlide(-1)" 
+    class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black text-white px-3 py-2 rounded-full">
+    ◀
+  </button>
+
+  <!-- BOTÓN DERECHA -->
+  <button onclick="moveSlide(1)" 
+    class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black text-white px-3 py-2 rounded-full">
+    ▶
+  </button>
+     </div>
+
+<!--CATALOGO-->
+    <section id="servicios" class="py-28">
+    <h2 class="text-3xl text-center mb-10">
+        Catálogo de Servicios
+    </h2>
+    
+    <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-6 px-4">
+     
+        <!--ITEM-->
+        <a href="Disen-grafico.html">
+  <div class="bg-white/70 backdrop-blur-md p-6 rounded-2xl shadow hover:scale-105 transition">
+            <h3 class="text-xl font-bold">Diseño Gráfico</h3>
+           </div>
+        </a>
+
+       <a href="C-M.html">
+  <div class="bg-white/70 backdrop-blur-md p-6 rounded-2xl shadow hover:scale-105 transition">
+            <h3 class="text-xl font-bold">Community Management</h3>
+        </div>
+       </a>
+
+        <a href="Imp-gran-formato.html">
+  <div class="bg-white/70 backdrop-blur-md p-6 rounded-2xl shadow hover:scale-105 transition">
+            <h3 class="text-xl font-bold">Impresion en Gran Formato</h3>
+        </div>
+        </a>
+
+        <a href="imp-uv.html">
+  <div class="bg-white/70 backdrop-blur-md p-6 rounded-2xl shadow hover:scale-105 transition">
+            <h3 class="text-xl font-bold">Impresion Uv en Rigidos</h3>
+        </div>
+        </a>
+
+        <a href="Offset.html">
+  <div class="bg-white/70 backdrop-blur-md p-6 rounded-2xl shadow hover:scale-105 transition">
+            <h3 class="text-xl font-bold">Offset</h3>
+        </div>
+        </a>
+
+        <a href="ipm-dg.html">
+  <div class="bg-white/70 backdrop-blur-md p-6 rounded-2xl shadow hover:scale-105 transition">
+            <h3 class="text-xl font-bold">Impresion Digital</h3>
+        </div>
+        </a>
+
+        <a href="cv.html">
+  <div class="bg-white/70 backdrop-blur-md p-6 rounded-2xl shadow hover:scale-105 transition">
+            <h3 class="text-xl font-bold">Cortes de Vinil</h3>
+        </div>
+        </a>
+
+
+        <a href="3d.html">
+  <div class="bg-white/70 backdrop-blur-md p-6 rounded-2xl shadow hover:scale-105 transition">
+            <h3 class="text-xl font-bold">Impresion 3D</h3>
+        </div>
+        </a>
+
+          </div>
+</section>
+
+<section class="py-28 text-center">
+
+  <h2 class="text-4xl font-bold mb-10">
+    Conoce nuestra línea creativa
+  </h2>
+
+  <div class="grid-dual">
+
+  <!-- creativa IZQUIERDA (CON LINK) -->
+  <a href="bruma-umbral.html">
+    <div class="mini-slider-container">
+      <div class="mini-slider">
+
+        <div class="mini-slide">
+          <img src="img/Brumad1.png">
+        </div>
+
+        <div class="mini-slide">
+          <img src="img/Umbrald1.png">
+        </div>
+
+      </div>
+    </div>
+  </a>
+
+  <!-- DERECHA (ESTÁTICO) -->
+  <div class="static-box">
+    <img src="img/infod.png">
+  </div>
+
+</div>
+</section>
+
+ <section id="contacto" class="text-center py-10 text-Black">
+
+  <h3 class="mb-6 text-3xl font-semibold mt-6">¿Ya nos sigues en nuestras redes sociales?</h3>
+
+  <div class="flex justify-center gap-4 flex-wrap">
+
+    <a href="https://www.facebook.com/rmyflor" target="_blank" class="btn-sticker">Facebook</a>
+
+    <a href="https://www.instagram.com/rm_yflorentino/?hl=es" target="_blank" class="btn-sticker">Instagram</a>
+
+    <a href="https://www.tiktok.com/@rm_yflorentino" target="_blank" class="btn-sticker">TikTok</a>
+    
+
+  </div>
+  </section>
+
+  <!-- BOTONES -->
+  <div class="text-center my-10">
+
+    <a href="https://whatsapp.com/channel/0029Vb7dS9j5fM5g1Vo0a32X" target="_blank" class="btn-sticker inline-block mb-4">
+      Únete a nuestro canal de difusión
+    </a>
+
+    <br>
+
+    <a href="https://wa.me/5564254139" target="_blank" class="btn-sticker inline-block">
+      Cotizar por WhatsApp
+    </a>
+
+  </div>
+
+</section>
+
+
+</main>
+
+<footer class="text-white py-16 mt-auto bg-[#E57373]">
+
+  <div class="max-w-6xl mx-auto px-6">
+    
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-16 text-left">
+
+      <!-- SERVICIOS -->
+      <div class="max-w-xs">
+        <h3 class="font-bold text-lg mb-6">Servicios</h3>
+        <ul class="space-y-3 text-gray-300">
+          <li><a href="#" class="hover:text-green-400">Diseño gráfico</a></li>
+          <li><a href="#" class="hover:text-green-400">Impresión</a></li>
+          <li><a href="#" class="hover:text-green-400">Marketing</a></li>
+        </ul>
+      </div>
+
+      <!-- PRODUCTOS -->
+      <div class="max-w-xs">
+        <h3 class="font-bold text-lg mb-6">Productos</h3>
+        <ul class="space-y-3 text-gray-300">
+          <li><a href="#" class="hover:text-green-400">Stickers</a></li>
+          <li><a href="#" class="hover:text-green-400">Lonas</a></li>
+          <li><a href="#" class="hover:text-green-400">3D</a></li>
+        </ul>
+      </div>
+
+      <!-- UBICACIÓN -->
+      <div class="max-w-xs">
+        <h3 class="font-bold text-lg mb-6">Ubicación</h3>
+
+        <a href="https://www.google.com/maps/place/RM+y+Florentino/@19.4072487,-99.0357438,17z/data=!3m1!4b1!4m6!3m5!1s0x85d1fd8a3868f371:0x76c4311aadf3408e!8m2!3d19.4072437!4d-99.0331689!16s%2Fg%2F11x0cnghtc?entry=ttu&g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D"
+           target="_blank"
+           class="text-gray-300 hover:text-green-400 transition block underline">
+           
+          Lago Guija 53<br>
+          Pirules, Nezahualcoyotl
+        </a>
+      </div>
+
+      <!-- ENVÍOS -->
+      <div class="max-w-xs">
+        <h3 class="font-bold text-lg mb-6">Envíos</h3>
+        <p class="text-gray-300 leading-relaxed">
+          Realizamos envíos locales y nacionales
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+  <script>
+let currentIndex = 0;
+
+function moveSlide(direction) {
+  const slider = document.getElementById("portfolioSlider");
+  const totalSlides = slider.children.length;
+
+  currentIndex += direction;
+
+  if (currentIndex < 0) currentIndex = totalSlides - 1;
+  if (currentIndex >= totalSlides) currentIndex = 0;
+
+  slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+}
+</script>
+
+<script>
+let lastScroll = 0;
+const header = document.getElementById("mainHeader");
+
+window.addEventListener("scroll", () => {
+  let currentScroll = window.pageYOffset;
+
+  if (currentScroll > lastScroll && currentScroll > 100) {
+    header.style.transform = "translateY(-100%)";
+  } else {
+    header.style.transform = "translateY(0)";
+  }
+
+  lastScroll = currentScroll;
+});
+</script>
+
+</footer>
+</body>
+</HTML>
