@@ -527,7 +527,7 @@
                 apiUrl: "https://foto-cloud-alexander-technician.trycloudflare.com",
                 apiKey: "key_web_rmflorentino_123",
                 botName: "RMIND Asistente",
-                welcomeMessage: "¡Hola! Soy RMIND. ¿En qué te ayudo? Puedo buscar información en internet para ti."
+                welcomeMessage: "¡Hola! Soy RMIND. ¿En qué te ayudo?."
             };
 
             // Crear botón flotante
@@ -580,7 +580,7 @@
                 const typingDiv = document.createElement('div');
                 typingDiv.className = 'rmind-typing';
                 typingDiv.id = 'rmindTyping';
-                typingDiv.innerHTML = '<i class="fas fa-ellipsis-h"></i> RMIND está pensando... (esto puede tomar unos minutos)';
+                typingDiv.innerHTML = '<i class="fas fa-ellipsis-h"></i> RMIND está pensando...';
                 messagesContainer.appendChild(typingDiv);
                 messagesContainer.scrollTop = messagesContainer.scrollHeight;
             }
@@ -615,10 +615,10 @@
                 } catch (error) {
                     clearTimeout(timeoutId);
                     if (error.name === 'AbortError') {
-                        return "⏰ La consulta está tomando más tiempo de lo habitual. Por favor, intenta dividirla en preguntas más pequeñas o espera un momento.";
+                        return "⏰ La consulta está tomando más tiempo de lo habitual. Intentalo de nuevo en unos segundos.";
                     }
                     console.error("Error conectando con RMIND:", error);
-                    return "⚠️ No pude conectar con el asistente. ¿Está corriendo el servidor local en http://localhost:5000?";
+                    return "⚠️ Lo siento, hubo un problema de conexión. Por favor, intenta de nuevo en unos segundos.";
                 }
             }
 
