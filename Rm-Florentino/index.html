@@ -501,34 +501,28 @@
         </div>
     </footer>
 
+    <!-- ========= CONFIGURACIÓN GLOBAL DEL CHAT ========= -->
     <script>
-        let currentIndex = 0;
-        function moveSlide(direction) {
-            const slider = document.getElementById("portfolioSlider");
-            const totalSlides = slider.children.length;
-            currentIndex += direction;
-            if (currentIndex < 0) currentIndex = totalSlides - 1;
-            if (currentIndex >= totalSlides) currentIndex = 0;
-            slider.style.transform = `translateX(-${currentIndex * 100}%)`;
-        }
+        window.RMIND_CONFIG = {
+            apiUrl: "https://foto-cloud-alexander-technician.trycloudflare.com",
+            apiKey: "key_web_rmflorentino_123",
+            botName: "RMIND Asistente",
+            welcomeMessage: "¡Hola! Soy RMIND. ¿En qué te ayudo?",
+            primaryColor: "#ff2d55",
+            position: "bottom-right"
+        };
+    </script>
 
-        let lastScroll = 0;
-        const header = document.getElementById("mainHeader");
-        window.addEventListener("scroll", () => {
-            let currentScroll = window.pageYOffset;
-            if (currentScroll > lastScroll && currentScroll > 100) header.style.transform = "translateY(-100%)";
-            else header.style.transform = "translateY(0)";
-            lastScroll = currentScroll;
-        });
-
-        // ========== CHAT RMIND CON TIMEOUT AUMENTADO (10 MINUTOS) ==========
+    <script>
+        // ========== CHAT RMIND (adaptado a configuración global) ==========
         (function() {
-            const CONFIG = {
-                apiUrl: "https://foto-cloud-alexander-technician.trycloudflare.com",
-                apiKey: "key_web_rmflorentino_123",
-                botName: "RMIND Asistente",
-                welcomeMessage: "¡Hola! Soy RMIND. ¿En qué te ayudo?."
-            };
+            // Tomar configuración de la variable global o usar valores por defecto
+            const config = window.RMIND_CONFIG || {};
+            const apiUrl = config.apiUrl || "https://foto-cloud-alexander-technician.trycloudflare.com";
+            const apiKey = config.apiKey || "key_web_rmflorentino_123";
+            const botName = config.botName || "RMIND Asistente";
+            const welcomeMessage = config.welcomeMessage || "¡Hola! Soy RMIND. ¿En qué te ayudo?";
+            const primaryColor = config.primaryColor || "#ff2d55";
 
             // Crear botón flotante
             const chatButton = document.createElement('div');
@@ -541,12 +535,12 @@
             chatWindow.className = 'rmind-chat-window';
             chatWindow.style.display = 'none';
             chatWindow.innerHTML = `
-                <div class="rmind-chat-header">
-                    <span><i class="fas fa-robot"></i> ${CONFIG.botName}</span>
+                <div class="rmind-chat-header" style="background: ${primaryColor};">
+                    <span><i class="fas fa-robot"></i> ${botName}</span>
                     <button id="rmindCloseChat" style="background:none; border:none; color:white; font-size:1.4rem; cursor:pointer;">&times;</button>
                 </div>
                 <div id="rmindMessages" class="rmind-chat-messages">
-                    <div class="rmind-message bot">${CONFIG.welcomeMessage}</div>
+                    <div class="rmind-message bot">${welcomeMessage}</div>
                 </div>
                 <div class="rmind-chat-input-area">
                     <input type="text" id="rmindInput" class="rmind-chat-input" placeholder="Escribe tu mensaje...">
@@ -590,25 +584,21 @@
                 if (typing) typing.remove();
             }
 
-            // ✅ FUNCIÓN CON TIMEOUT DE 10 MINUTOS (600,000 ms)
             async function sendToRMIND(query) {
-                // Crear un controlador de timeout de 10 minutos
                 const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 600000); // 10 minutos = 600,000 ms
+                const timeoutId = setTimeout(() => controller.abort(), 600000); // 10 minutos
 
                 try {
-                    const response = await fetch(`${CONFIG.apiUrl}/preguntar`, {
+                    const response = await fetch(`${apiUrl}/preguntar`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
-                            'X-API-Key': CONFIG.apiKey
+                            'X-API-Key': apiKey
                         },
                         body: JSON.stringify({ mensaje: query }),
                         signal: controller.signal
                     });
-                    
                     clearTimeout(timeoutId);
-                    
                     if (!response.ok) throw new Error('Error en la respuesta del servidor');
                     const data = await response.json();
                     return data.respuesta || "Lo siento, no pude procesar tu consulta.";
