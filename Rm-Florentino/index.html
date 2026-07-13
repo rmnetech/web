@@ -148,6 +148,7 @@
             object-fit: cover;
         }
 
+        /* ========= NOTICIAS SLIDER - EXACTAMENTE COMO ESTABA EN TU ORIGINAL ========= */
         @keyframes slideVertical {
             0%   { transform: translateY(0); }
             25%  { transform: translateY(0); }
@@ -160,7 +161,7 @@
 
         .noticias-container {
             width: 550px;
-            height: 700px;
+            height: 700px; /* TAMAÑO ORIGINAL */
             margin: 80px auto;
             overflow: hidden;
             border-radius: 20px;
@@ -169,13 +170,13 @@
         .noticias-slider {
             display: flex;
             flex-direction: column;
-            height: 300%;
+            height: 100%;
             animation: slideVertical 24s ease-in-out infinite;
         }
 
         .noticia {
             width: 100%;
-            height: 33.33%;
+            height: 700px; /* TAMAÑO ORIGINAL */
             flex-shrink: 0;
             display: flex;
             align-items: center;
@@ -188,19 +189,7 @@
             object-fit: contain;
         }
 
-        header {
-            backdrop-filter: blur(10px);
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        section {
-            scroll-margin-top: 120px;
-        }
-
-        /* ========= PORTAFOLIO SLIDER - SOLO LAS FLECHAS, MISMO TAMAÑO ORIGINAL ========= */
+        /* ========= PORTAFOLIO SLIDER - SOLO CORREGIDO LO QUE PEDISTE ========= */
         .portfolio-wrapper {
             position: relative;
             max-width: 1200px;
@@ -216,14 +205,14 @@
 
         .portfolio-slide {
             min-width: 100%;
-            height: 500px; /* TAMAÑO ORIGINAL RESTAURADO */
+            height: 500px;
             flex-shrink: 0;
         }
 
         .portfolio-slide img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain; /* <-- CAMBIADO A contain PARA QUE NO SE CORTE EL TEXTO */
         }
 
         .portfolio-btn {
@@ -256,6 +245,18 @@
 
         .portfolio-btn-right {
             right: 16px;
+        }
+
+        header {
+            backdrop-filter: blur(10px);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        section {
+            scroll-margin-top: 120px;
         }
 
         @media (max-width: 768px) {
@@ -293,6 +294,7 @@
             .noticias-container {
                 width: 90%;
                 height: 300px;
+                margin: 40px auto;
             }
 
             .noticia {
@@ -359,6 +361,7 @@
             </div>
         </section>
 
+        <!-- NOTICIAS SLIDER - EXACTAMENTE COMO ESTABA EN TU ORIGINAL -->
         <div class="flex items-center justify-center gap-10 max-w-6xl mx-auto mt-20">
             <div class="max-w-sm">
                 <h2 class="text-3xl font-bold mb-4">Cosas nuevas en el estudio</h2>
@@ -373,7 +376,7 @@
             </div>
         </div>
 
-        <!-- PORTAFOLIO CON FLECHAS Y TAMAÑO ORIGINAL -->
+        <!-- PORTAFOLIO CON FLECHAS CORREGIDAS -->
         <section id="portafolio" class="py-28">
             <h2 class="text-4xl font-bold text-center mb-10">Portafolio</h2>
             <div class="px-4">
