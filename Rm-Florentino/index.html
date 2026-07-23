@@ -4,620 +4,566 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>RM & Florentino | Estudio de Diseño</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* ===== ESTILOS BASE ===== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* ===== RESET Y BASE ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             background: radial-gradient(circle at top, #f7ff8b67, #ff949475);
-            font-family: sans-serif;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            padding-top: 60px;
             overflow-x: hidden;
         }
+        a { text-decoration: none; color: inherit; }
 
-        /* ===== BOTONES ===== */
+        /* ===== HEADER FIJO ===== */
+        header {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            z-index: 50;
+            background: rgba(255, 242, 174, 0.96);
+            backdrop-filter: blur(8px);
+            padding: 6px 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            transition: transform 0.3s;
+        }
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .logo-area img {
+            width: 28px;
+            height: auto;
+        }
+        .logo-area h1 {
+            font-size: 11px;
+            font-weight: 600;
+            color: #1a1a1a;
+            display: none;
+        }
+        .header-title {
+            font-size: 16px;
+            font-weight: 800;
+            letter-spacing: -0.3px;
+            color: #1a1a1a;
+            text-align: center;
+            flex: 1;
+        }
+        .nav-desktop {
+            display: none;
+            gap: 24px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .nav-desktop a { color: #1a1a1a; transition: color 0.2s; }
+        .nav-desktop a:hover { color: #ff2d55; }
+
+        @media (min-width: 1024px) {
+            body { padding-top: 80px; }
+            header { padding: 12px 32px; }
+            .logo-area img { width: 48px; }
+            .logo-area h1 { display: block; font-size: 18px; }
+            .header-title { font-size: 32px; }
+            .nav-desktop { display: flex; }
+        }
+
+        /* ===== BOTÓN STICKER ===== */
         .btn-sticker {
             background: #ff2d55;
-            color: white;
-            padding: 8px 16px;
-            border: 2px solid black;
-            border-radius: 12px;
-            box-shadow: 3px 3px 0px black;
-            transition: 0.2s;
+            color: #fff;
+            padding: 8px 18px;
+            border: 2px solid #000;
+            border-radius: 40px;
+            box-shadow: 4px 4px 0 #000;
+            font-weight: 700;
+            font-size: 14px;
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            font-weight: bold;
-            font-size: 14px;
+            transition: 0.15s;
         }
-
         .btn-sticker:hover {
             transform: translate(-2px, -2px);
-            box-shadow: 5px 5px 0px black;
+            box-shadow: 6px 6px 0 #000;
         }
 
         /* ===== TARJETAS DE SERVICIO ===== */
         .service-card {
-            background: #ffffff;
-            border: 3px solid black;
-            border-radius: 16px;
-            box-shadow: 4px 4px 0px #000;
-            transition: 0.2s;
-            padding: 16px !important;
+            background: #fff;
+            border: 3px solid #000;
+            border-radius: 20px;
+            box-shadow: 6px 6px 0 #000;
+            padding: 16px 8px;
+            text-align: center;
+            transition: 0.15s;
+            font-weight: 700;
+            font-size: 16px;
         }
-
         .service-card:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0px #000;
+            transform: translate(-3px, -3px);
+            box-shadow: 8px 8px 0 #000;
         }
-
-        .service-card h3 {
-            font-size: 18px !important;
+        @media (min-width: 1024px) {
+            .service-card { font-size: 22px; padding: 24px 16px; }
         }
 
         /* ===== SLIDER PRINCIPAL ===== */
         .slider-container {
-            max-width: 100%;
-            height: 200px;
-            margin: auto;
+            width: 100%;
             overflow: hidden;
-            border-radius: 12px;
+            border-radius: 16px;
+            aspect-ratio: 2 / 1; /* proporción 2:1 */
+            background: transparent;
         }
-
-        .slider {
+        .slider-track {
             display: flex;
-            width: 200%;
-            animation: slide 15s ease-in-out infinite;
+            transition: transform 0.5s ease;
             height: 100%;
         }
-
-        .slide {
-            width: 50%;
+        .slider-slide {
+            flex: 0 0 100%;
             height: 100%;
-            flex-shrink: 0;
         }
-
-        .slide img {
+        .slider-slide img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        @keyframes slide {
-            0%   { transform: translateX(0); }
-            40%  { transform: translateX(0); }
-            50%  { transform: translateX(-50%); }
-            90%  { transform: translateX(-50%); }
-            100% { transform: translateX(0); }
-        }
-
-        /* ===== NOTICIAS SLIDER VERTICAL (VERSIÓN MÓVIL) ===== */
-        .noticias-container-mobile {
+        /* ===== NOTICIAS SLIDER - PROPORCIÓN 12:5 (1200x500) ===== */
+        .noticias-container {
             width: 100%;
-            height: 250px;
-            margin: 20px auto;
+            max-width: 700px;
+            aspect-ratio: 12 / 5;
+            margin: 0 auto;
             overflow: hidden;
             border-radius: 16px;
-            position: relative;
+            background: transparent;
+            height: auto;
         }
-
-        .noticias-slider-mobile {
+        .noticias-slider {
             display: flex;
             flex-direction: column;
             height: 300%;
-            animation: slideVerticalMobile 18s ease-in-out infinite;
+            animation: slideVertical 18s ease-in-out infinite;
         }
-
-        .noticia-mobile {
+        .noticia {
             width: 100%;
             height: 33.33%;
             flex-shrink: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #fff;
+            background: transparent;
         }
-
-        .noticia-mobile img {
+        .noticia img {
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover;
         }
 
-        @keyframes slideVerticalMobile {
+        @keyframes slideVertical {
             0%, 25% { transform: translateY(0); }
             33%, 58% { transform: translateY(-33.33%); }
             66%, 91% { transform: translateY(-66.66%); }
             100% { transform: translateY(0); }
         }
 
-        /* ===== PORTAFOLIO SLIDER (VERSIÓN MÓVIL) ===== */
+        @media (min-width: 1024px) {
+            .noticias-container {
+                max-width: 800px;
+            }
+        }
+
+        /* ===== PORTAFOLIO ===== */
         .portfolio-wrapper {
             position: relative;
             width: 100%;
-            max-width: 100%;
-            margin: 0 auto;
             overflow: hidden;
             border-radius: 16px;
+            aspect-ratio: 2 / 1;
+            background: transparent;
         }
-
-        .portfolio-slider {
+        .portfolio-track {
             display: flex;
             transition: transform 0.5s ease;
+            height: 100%;
         }
-
         .portfolio-slide {
-            min-width: 100%;
-            height: 250px;
-            flex-shrink: 0;
+            flex: 0 0 100%;
+            height: 100%;
         }
-
         .portfolio-slide img {
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover;
         }
-
         .portfolio-btn {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            border: 2px solid white;
+            background: rgba(0,0,0,0.7);
+            border: 2px solid #fff;
             border-radius: 50%;
+            color: #fff;
             width: 36px;
             height: 36px;
-            font-size: 16px;
+            font-size: 18px;
             cursor: pointer;
-            z-index: 10;
-            transition: all 0.2s;
+            z-index: 5;
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: 0.2s;
         }
-
         .portfolio-btn:hover {
             background: #ff2d55;
-            transform: translateY(-50%) scale(1.1);
+            transform: translateY(-50%) scale(1.05);
+        }
+        .portfolio-btn-left { left: 6px; }
+        .portfolio-btn-right { right: 6px; }
+        @media (min-width: 1024px) {
+            .portfolio-btn { width: 48px; height: 48px; font-size: 24px; }
+            .portfolio-btn-left { left: 16px; }
+            .portfolio-btn-right { right: 16px; }
         }
 
-        .portfolio-btn-left {
-            left: 8px;
-        }
-
-        .portfolio-btn-right {
-            right: 8px;
-        }
-
-        /* ===== LÍNEA CREATIVA (MÓVIL) ===== */
-        .grid-dual-mobile {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            max-width: 100%;
-            margin: 20px auto;
-            padding: 0 10px;
-        }
-
-        .mini-slider-container-mobile {
-            height: 150px;
+        /* ===== LÍNEA CREATIVA ===== */
+        .mini-slider-wrapper {
             overflow: hidden;
             border-radius: 12px;
-            cursor: pointer;
+            aspect-ratio: 2 / 1;
+            background: transparent;
         }
-
-        .mini-slider-mobile {
+        .mini-track {
             display: flex;
             width: 200%;
-            animation: miniSlideMobile 20s ease-in-out infinite;
+            animation: miniAnim 20s ease-in-out infinite;
             height: 100%;
         }
-
-        .mini-slide-mobile {
-            min-width: 100%;
+        .mini-slide {
+            flex: 0 0 50%;
             height: 100%;
         }
-
-        .mini-slide-mobile img {
+        .mini-slide img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-
-        @keyframes miniSlideMobile {
-            0%   { transform: translateX(0); }
-            48%  { transform: translateX(0); }
-            52%  { transform: translateX(-100%); }
-            98%  { transform: translateX(-100%); }
+        @keyframes miniAnim {
+            0%, 45% { transform: translateX(0); }
+            50%, 95% { transform: translateX(-50%); }
             100% { transform: translateX(0); }
         }
-
-        .static-box-mobile {
-            height: 150px;
+        .static-box {
             border-radius: 12px;
             overflow: hidden;
+            aspect-ratio: 2 / 1;
+            background: transparent;
         }
-
-        .static-box-mobile img {
+        .static-box img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        /* ===== HEADER MÓVIL ===== */
-        header {
-            backdrop-filter: blur(10px);
-            padding: 8px 12px !important;
+        /* ===== LAYOUT GENERAL ===== */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 16px;
         }
-
-        header .flex {
-            flex-direction: row !important;
-            justify-content: space-between !important;
-            align-items: center !important;
-            gap: 6px !important;
-        }
-
-        header h1 {
-            font-size: 12px !important;
-            display: none;
-        }
-
-        header h2 {
-            font-size: 16px !important;
-        }
-
-        header img {
-            width: 32px !important;
-        }
-
-        nav {
-            display: none !important;
-        }
-
-        /* ===== SECCIONES ===== */
         section {
-            scroll-margin-top: 60px;
-            padding: 20px 12px !important;
+            padding: 30px 0;
+            scroll-margin-top: 70px;
         }
-
-        .pt-32 {
-            padding-top: 70px !important;
+        .section-title {
+            font-size: 24px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 20px;
         }
-
-        .py-28 {
-            padding-top: 30px !important;
-            padding-bottom: 30px !important;
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
         }
-
-        .text-4xl {
-            font-size: 24px !important;
+        .text-block {
+            font-size: 15px;
+            line-height: 1.7;
+            text-align: left;
+            color: #1a1a1a;
         }
-
-        .text-2xl {
-            font-size: 18px !important;
+        .flex-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
         }
-
-        .text-lg {
-            font-size: 15px !important;
+        .social-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
         }
-
-        .text-xl {
-            font-size: 16px !important;
+        .servicios-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
         }
-
-        .mt-20 {
-            margin-top: 20px !important;
-        }
-
-        .mt-6 {
-            margin-top: 10px !important;
-        }
-
-        .mb-10 {
-            margin-bottom: 20px !important;
-        }
-
-        .gap-10 {
-            gap: 15px !important;
-        }
-
-        /* ===== TEXTO ===== */
-        p {
-            font-size: 14px !important;
-            line-height: 1.6 !important;
-        }
-
-        .text-justify {
-            text-align: left !important;
+        @media (min-width: 1024px) {
+            section { padding: 80px 0; scroll-margin-top: 100px; }
+            .section-title { font-size: 44px; margin-bottom: 40px; }
+            .grid-2 { grid-template-columns: 1fr 1fr; gap: 40px; }
+            .text-block { font-size: 18px; }
+            .flex-center { flex-direction: row; justify-content: center; gap: 30px; }
+            .social-buttons { gap: 16px; }
+            .btn-sticker { font-size: 18px; padding: 12px 28px; }
+            .servicios-grid { gap: 24px; }
         }
 
         /* ===== FOOTER ===== */
         footer {
-            padding: 30px 16px !important;
+            background: #E57373;
+            color: #fff;
+            padding: 30px 16px;
+        }
+        .footer-flex {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 16px 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .footer-item {
+            flex: 0 1 auto;
+            min-width: 80px;
+        }
+        .footer-item h4 {
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+        .footer-item ul {
+            list-style: none;
+            font-size: 12px;
+            line-height: 1.6;
+            padding: 0;
+        }
+        .footer-item a, .footer-item p {
+            color: #f0f0f0;
+            font-size: 12px;
+        }
+        .footer-item a:hover { color: #aaffaa; }
+        @media (min-width: 1024px) {
+            footer { padding: 50px 40px; }
+            .footer-item h4 { font-size: 20px; margin-bottom: 10px; }
+            .footer-item ul { font-size: 16px; }
+            .footer-item a, .footer-item p { font-size: 16px; }
+            .footer-flex { gap: 40px; }
         }
 
-        footer .grid {
-            grid-template-columns: 1fr 1fr !important;
-            gap: 20px !important;
-            text-align: center !important;
-        }
-
-        footer h3 {
-            font-size: 14px !important;
-        }
-
-        footer li, footer p, footer a {
-            font-size: 12px !important;
-        }
-
-        /* ===== RESPONSIVE GENERAL ===== */
-        @media (min-width: 769px) {
-            /* Estilos para escritorio (se mantienen igual) */
-            .slider-container {
-                height: 500px;
-            }
-
-            .noticias-container-mobile {
-                height: 700px;
-                width: 550px;
-            }
-
-            .portfolio-slide {
-                height: 500px;
-            }
-
-            .portfolio-btn {
-                width: 48px;
-                height: 48px;
-                font-size: 24px;
-            }
-
-            .portfolio-btn-left {
-                left: 16px;
-            }
-
-            .portfolio-btn-right {
-                right: 16px;
-            }
-
-            .grid-dual-mobile {
-                grid-template-columns: 1fr 1fr;
-                max-width: 1200px;
-                gap: 20px;
-            }
-
-            .mini-slider-container-mobile {
-                height: 250px;
-            }
-
-            .static-box-mobile {
-                height: 250px;
-            }
-
-            header h1 {
-                display: block !important;
-                font-size: 20px !important;
-            }
-
-            header h2 {
-                font-size: 28px !important;
-            }
-
-            header img {
-                width: 48px !important;
-            }
-
-            nav {
-                display: flex !important;
-            }
-
-            .text-4xl {
-                font-size: 36px !important;
-            }
-
-            .py-28 {
-                padding-top: 70px !important;
-                padding-bottom: 70px !important;
-            }
-
-            footer .grid {
-                grid-template-columns: 1fr 1fr 1fr 1fr !important;
-                gap: 40px !important;
-                text-align: left !important;
-            }
-        }
-
-        /* ===== Ajustes extra para móvil ===== */
         @media (max-width: 480px) {
-            .btn-sticker {
-                font-size: 12px !important;
-                padding: 6px 12px !important;
-            }
-
-            .service-card h3 {
-                font-size: 15px !important;
-            }
-
-            .portfolio-slide {
-                height: 200px;
-            }
-
-            .noticias-container-mobile {
-                height: 200px;
-            }
+            .header-title { font-size: 14px; }
+            .logo-area img { width: 24px; }
+            .noticias-container { max-width: 100%; }
         }
     </style>
 </head>
-
 <body>
 
-    <header id="mainHeader" class="fixed top-0 left-0 w-full z-50 transition-transform duration-300 bg-[#FFF2AE]">
-        <div class="flex items-center justify-between px-3 py-2 md:px-6 md:py-4">
-            <div class="flex items-center gap-2">
-                <img src="img/logo.png" class="w-8 md:w-12" alt="Logo">
-                <h1 class="font-semibold text-black text-xs md:text-xl">Estudio de Diseño</h1>
-            </div>
-            <h2 class="text-black text-sm md:text-4xl font-bold tracking-wide text-center">RM & Florentino</h2>
-            <nav class="hidden md:flex gap-6 text-2xl text-black font-bold">
-                <a href="#servicios" class="hover:text-green-400">Servicios</a>
-                <a href="#portafolio" class="hover:text-green-400">Portafolio</a>
-                <a href="#contacto" class="hover:text-green-400">Contacto</a>
-            </nav>
+<header id="mainHeader">
+    <div class="header-inner">
+        <div class="logo-area">
+            <img src="img/logo.png" alt="Logo">
+            <h1>Estudio de Diseño</h1>
         </div>
-    </header>
+        <span class="header-title">RM & Florentino</span>
+        <nav class="nav-desktop">
+            <a href="#servicios">Servicios</a>
+            <a href="#portafolio">Portafolio</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+    </div>
+</header>
 
-    <main class="flex-grow">
-        <!-- SLIDER PRINCIPAL -->
-        <section class="pt-20 md:pt-32 pb-6 md:pb-20">
-            <div class="slider-container">
-                <div class="slider">
-                    <div class="slide"><img src="img/principal1.png" alt="Principal 1"></div>
-                    <div class="slide"><img src="img/principal2.png" alt="Principal 2"></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- TÍTULO -->
-        <p class="text-base md:text-4xl font-semibold mt-2 md:mt-6 px-4">
-            Diseño Gráfico | Impresión | Publicidad | Marketing
-        </p>
-
-        <!-- PRESENTACIÓN -->
-        <section class="py-6 md:py-28 max-w-5xl mx-auto px-4">
-            <h2 class="text-2xl md:text-4xl font-bold text-center mb-4 md:mb-10">RM & Florentino</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 text-left text-sm md:text-xl text-gray-800 font-medium">
-                <p>En RM & Florentino Estudio de Diseño nos especializamos en transformar ideas en identidad visual. Nuestro enfoque combina creatividad, estrategia y detalle para desarrollar proyectos que conecten con las personas y generen impacto.</p>
-                <p>Desde diseño gráfico y marketing hasta impresión en distintos formatos, trabajamos cada proyecto con pasión y compromiso, cuidando cada elemento para ofrecer resultados profesionales y auténticos.</p>
-            </div>
-        </section>
-
-        <!-- NOTICIAS SLIDER VERTICAL (VERSIÓN MÓVIL) -->
-        <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-10 max-w-6xl mx-auto mt-4 md:mt-20 px-4">
-            <div class="max-w-sm text-center md:text-left">
-                <h2 class="text-2xl md:text-3xl font-bold mb-2">Cosas nuevas en el estudio</h2>
-                <p class="text-sm md:text-lg font-medium">Descubre los últimos trabajos, ideas y proyectos que estamos creando.</p>
-            </div>
-            <div class="noticias-container-mobile">
-                <div class="noticias-slider-mobile">
-                    <div class="noticia-mobile"><img src="img/NOTICIAS11.png" alt="Noticia 1"></div>
-                    <div class="noticia-mobile"><img src="img/noticias2.png" alt="Noticia 2"></div>
-                    <div class="noticia-mobile"><img src="img/noticias3.png" alt="Noticia 3"></div>
-                </div>
+<main>
+    <!-- SLIDER PRINCIPAL -->
+    <section style="padding-top: 10px; padding-bottom: 10px;">
+        <div class="slider-container">
+            <div class="slider-track" id="mainSlider">
+                <div class="slider-slide"><img src="img/principal1.png" alt="Slide 1"></div>
+                <div class="slider-slide"><img src="img/principal2.png" alt="Slide 2"></div>
             </div>
         </div>
+        <p style="text-align:center; font-size: 16px; font-weight: 600; margin-top: 8px;">Diseño Gráfico | Impresión | Publicidad | Marketing</p>
+    </section>
 
-        <!-- PORTAFOLIO -->
-        <section id="portafolio" class="py-6 md:py-28">
-            <h2 class="text-2xl md:text-4xl font-bold text-center mb-4 md:mb-10">Portafolio</h2>
-            <div class="px-3 md:px-4">
-                <div class="portfolio-wrapper">
-                    <div id="portfolioSlider" class="portfolio-slider">
-                        <div class="portfolio-slide"><img src="img/portafolio1.png" alt="Proyecto 1"></div>
-                        <div class="portfolio-slide"><img src="img/portafolio2.png" alt="Proyecto 2"></div>
-                        <div class="portfolio-slide"><img src="img/portafolio3.png" alt="Proyecto 3"></div>
-                        <div class="portfolio-slide"><img src="img/portafolio4.png" alt="Proyecto 4"></div>
-                        <div class="portfolio-slide"><img src="img/portafolio5.png" alt="Proyecto 5"></div>
-                        <div class="portfolio-slide"><img src="img/portafolio6.png" alt="Proyecto 6"></div>
+    <!-- PRESENTACIÓN -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">RM & Florentino</h2>
+            <div class="grid-2">
+                <p class="text-block">En RM & Florentino Estudio de Diseño nos especializamos en transformar ideas en identidad visual. Nuestro enfoque combina creatividad, estrategia y detalle para desarrollar proyectos que conecten con las personas y generen impacto.</p>
+                <p class="text-block">Desde diseño gráfico y marketing hasta impresión en distintos formatos, trabajamos cada proyecto con pasión y compromiso, cuidando cada elemento para ofrecer resultados profesionales y auténticos.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- NOTICIAS SLIDER -->
+    <section>
+        <div class="container">
+            <div class="flex-center" style="flex-direction: column; gap: 16px;">
+                <div style="text-align: center;">
+                    <h2 class="section-title" style="margin-bottom: 4px;">Cosas nuevas en el estudio</h2>
+                    <p style="font-size: 15px; color: #333;">Descubre los últimos trabajos, ideas y proyectos que estamos creando.</p>
+                </div>
+                <div class="noticias-container">
+                    <div class="noticias-slider">
+                        <div class="noticia"><img src="img/noticias1.png" alt="Noticia 1"></div>
+                        <div class="noticia"><img src="img/noticias2.png" alt="Noticia 2"></div>
+                        <div class="noticia"><img src="img/noticias3.png" alt="Noticia 3"></div>
                     </div>
-                    <button class="portfolio-btn portfolio-btn-left" onclick="moveSlide(-1)">◀</button>
-                    <button class="portfolio-btn portfolio-btn-right" onclick="moveSlide(1)">▶</button>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- CATÁLOGO DE SERVICIOS -->
-        <section id="servicios" class="py-6 md:py-28">
-            <h2 class="text-2xl md:text-4xl font-bold text-center mb-4 md:mb-10">Catálogo de Servicios</h2>
-            <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-2 gap-3 md:gap-6 px-3 md:px-4">
-                <a href="Disen-grafico.html"><div class="service-card bg-white rounded-2xl shadow hover:scale-105 transition text-center"><h3 class="font-bold">Diseño Gráfico</h3></div></a>
-                <a href="C-M.html"><div class="service-card bg-white rounded-2xl shadow hover:scale-105 transition text-center"><h3 class="font-bold">Community Management</h3></div></a>
-                <a href="Imp-gran-formato.html"><div class="service-card bg-white rounded-2xl shadow hover:scale-105 transition text-center"><h3 class="font-bold">Impresión en Gran Formato</h3></div></a>
-                <a href="imp-uv.html"><div class="service-card bg-white rounded-2xl shadow hover:scale-105 transition text-center"><h3 class="font-bold">Impresión UV en Rígidos</h3></div></a>
-                <a href="Offset.html"><div class="service-card bg-white rounded-2xl shadow hover:scale-105 transition text-center"><h3 class="font-bold">Offset</h3></div></a>
-                <a href="ipm-dg.html"><div class="service-card bg-white rounded-2xl shadow hover:scale-105 transition text-center"><h3 class="font-bold">Impresión Digital</h3></div></a>
-                <a href="cv.html"><div class="service-card bg-white rounded-2xl shadow hover:scale-105 transition text-center"><h3 class="font-bold">Cortes de Vinil</h3></div></a>
-                <a href="3d.html"><div class="service-card bg-white rounded-2xl shadow hover:scale-105 transition text-center"><h3 class="font-bold">Impresión 3D</h3></div></a>
+    <!-- PORTAFOLIO -->
+    <section id="portafolio">
+        <div class="container">
+            <h2 class="section-title">Portafolio</h2>
+            <div class="portfolio-wrapper">
+                <div class="portfolio-track" id="portfolioTrack">
+                    <div class="portfolio-slide"><img src="img/portafolio1.png" alt="Proyecto 1"></div>
+                    <div class="portfolio-slide"><img src="img/portafolio2.png" alt="Proyecto 2"></div>
+                    <div class="portfolio-slide"><img src="img/portafolio3.png" alt="Proyecto 3"></div>
+                    <div class="portfolio-slide"><img src="img/portafolio4.png" alt="Proyecto 4"></div>
+                    <div class="portfolio-slide"><img src="img/portafolio5.png" alt="Proyecto 5"></div>
+                    <div class="portfolio-slide"><img src="img/portafolio6.png" alt="Proyecto 6"></div>
+                </div>
+                <button class="portfolio-btn portfolio-btn-left" onclick="movePortfolio(-1)">‹</button>
+                <button class="portfolio-btn portfolio-btn-right" onclick="movePortfolio(1)">›</button>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- LÍNEA CREATIVA (VERSIÓN MÓVIL) -->
-        <section class="py-6 md:py-28 text-center">
-            <h2 class="text-2xl md:text-4xl font-bold mb-4 md:mb-10">Conoce nuestra línea creativa</h2>
-            <div class="grid-dual-mobile">
-                <a href="bruma-umbral.html">
-                    <div class="mini-slider-container-mobile">
-                        <div class="mini-slider-mobile">
-                            <div class="mini-slide-mobile"><img src="img/Brumad1.png" alt="Bruma"></div>
-                            <div class="mini-slide-mobile"><img src="img/Umbrald1.png" alt="Umbral"></div>
-                        </div>
+    <!-- CATÁLOGO DE SERVICIOS -->
+    <section id="servicios">
+        <div class="container">
+            <h2 class="section-title">Catálogo de Servicios</h2>
+            <div class="servicios-grid">
+                <a href="Disen-grafico.html"><div class="service-card">Diseño Gráfico</div></a>
+                <a href="C-M.html"><div class="service-card">Community Management</div></a>
+                <a href="Imp-gran-formato.html"><div class="service-card">Impresión Gran Formato</div></a>
+                <a href="imp-uv.html"><div class="service-card">Impresión UV Rígidos</div></a>
+                <a href="Offset.html"><div class="service-card">Offset</div></a>
+                <a href="ipm-dg.html"><div class="service-card">Impresión Digital</div></a>
+                <a href="cv.html"><div class="service-card">Cortes de Vinil</div></a>
+                <a href="3d.html"><div class="service-card">Impresión 3D</div></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- LÍNEA CREATIVA -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Conoce nuestra línea creativa</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                <div class="mini-slider-wrapper">
+                    <div class="mini-track">
+                        <div class="mini-slide"><img src="img/Brumad1.png" alt="Bruma"></div>
+                        <div class="mini-slide"><img src="img/Umbrald1.png" alt="Umbral"></div>
                     </div>
-                </a>
-                <div class="static-box-mobile"><img src="img/infod.png" alt="Info"></div>
+                </div>
+                <div class="static-box"><img src="img/infod.png" alt="Info"></div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- CONTACTO -->
-        <section id="contacto" class="text-center py-6 md:py-10 text-black">
-            <h3 class="mb-4 text-xl md:text-3xl font-semibold mt-4 md:mt-6">¿Ya nos sigues en nuestras redes sociales?</h3>
-            <div class="flex justify-center gap-2 md:gap-4 flex-wrap px-3">
+    <!-- CONTACTO -->
+    <section id="contacto">
+        <div class="container" style="text-align:center;">
+            <h2 class="section-title" style="font-size: 24px;">¿Ya nos sigues en redes?</h2>
+            <div class="social-buttons">
                 <a href="https://www.facebook.com/rmyflor" target="_blank" class="btn-sticker"><i class="fab fa-facebook"></i> Facebook</a>
-                <a href="https://www.instagram.com/rm_yflorentino/?hl=es" target="_blank" class="btn-sticker"><i class="fab fa-instagram"></i> Instagram</a>
+                <a href="https://www.instagram.com/rm_yflorentino/" target="_blank" class="btn-sticker"><i class="fab fa-instagram"></i> Instagram</a>
                 <a href="https://www.tiktok.com/@rm_yflorentino" target="_blank" class="btn-sticker"><i class="fab fa-tiktok"></i> TikTok</a>
             </div>
-        </section>
-
-        <!-- WHATSAPP -->
-        <div class="text-center my-6 md:my-10 px-3">
-            <a href="https://whatsapp.com/channel/0029Vb7dS9j5fM5g1Vo0a32X" target="_blank" class="btn-sticker inline-block mb-3 md:mb-4"><i class="fab fa-whatsapp"></i> Canal de difusión</a>
-            <br>
-            <a href="https://wa.me/5564254139" target="_blank" class="btn-sticker inline-block"><i class="fab fa-whatsapp"></i> Cotizar por WhatsApp</a>
-        </div>
-    </main>
-
-    <footer class="text-white py-8 md:py-16 mt-auto bg-[#E57373]">
-        <div class="max-w-6xl mx-auto px-4 md:px-6">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-16 text-center md:text-left">
-                <div><h3 class="font-bold text-sm md:text-lg mb-2 md:mb-6">Servicios</h3><ul class="space-y-1 md:space-y-3 text-gray-300 font-medium text-xs md:text-base"><li><a href="#" class="hover:text-green-400">Diseño gráfico</a></li><li><a href="#" class="hover:text-green-400">Impresión</a></li><li><a href="#" class="hover:text-green-400">Marketing</a></li></ul></div>
-                <div><h3 class="font-bold text-sm md:text-lg mb-2 md:mb-6">Productos</h3><ul class="space-y-1 md:space-y-3 text-gray-300 font-medium text-xs md:text-base"><li><a href="#" class="hover:text-green-400">Stickers</a></li><li><a href="#" class="hover:text-green-400">Lonas</a></li><li><a href="#" class="hover:text-green-400">3D</a></li></ul></div>
-                <div><h3 class="font-bold text-sm md:text-lg mb-2 md:mb-6">Ubicación</h3><a href="https://www.google.com/maps/place/RM+y+Florentino/@19.4072487,-99.0357438,17z" target="_blank" class="text-gray-300 hover:text-green-400 transition block underline font-medium text-xs md:text-base">Lago Guija 53<br>Pirules, Neza</a></div>
-                <div><h3 class="font-bold text-sm md:text-lg mb-2 md:mb-6">Envíos</h3><p class="text-gray-300 leading-relaxed font-medium text-xs md:text-base">Locales y nacionales</p></div>
+            <div style="margin-top: 20px;">
+                <a href="https://whatsapp.com/channel/0029Vb7dS9j5fM5g1Vo0a32X" target="_blank" class="btn-sticker"><i class="fab fa-whatsapp"></i> Canal de difusión</a>
+                <br><br>
+                <a href="https://wa.me/5564254139" target="_blank" class="btn-sticker"><i class="fab fa-whatsapp"></i> Cotizar por WhatsApp</a>
             </div>
         </div>
-    </footer>
+    </section>
+</main>
 
-    <script>
-        // ========== PORTAFOLIO SLIDER ==========
-        let currentSlide = 0;
-        const totalSlides = 6;
-        const slider = document.getElementById('portfolioSlider');
+<footer>
+    <div class="footer-flex">
+        <div class="footer-item">
+            <h4>Servicios</h4>
+            <ul>
+                <li>Diseño gráfico</li>
+                <li>Impresión</li>
+                <li>Marketing</li>
+            </ul>
+        </div>
+        <div class="footer-item">
+            <h4>Productos</h4>
+            <ul>
+                <li>Stickers</li>
+                <li>Lonas</li>
+                <li>3D</li>
+            </ul>
+        </div>
+        <div class="footer-item">
+            <h4>Ubicación</h4>
+            <a href="https://maps.app.goo.gl/PGAwosYrpDym5f8fA" target="_blank" style="color:#f0f0f0;">Lago Guija 53, Pirules, Neza</a>
+        </div>
+        <div class="footer-item">
+            <h4>Envíos</h4>
+            <p style="color:#f0f0f0;">Locales y nacionales</p>
+        </div>
+    </div>
+</footer>
 
-        function moveSlide(direction) {
-            currentSlide += direction;
-            if (currentSlide < 0) currentSlide = totalSlides - 1;
-            if (currentSlide >= totalSlides) currentSlide = 0;
-            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+<script>
+    // ========== PORTAFOLIO SLIDER ==========
+    let currentPortfolio = 0;
+    const totalPortfolio = 6;
+    const track = document.getElementById('portfolioTrack');
+
+    function movePortfolio(dir) {
+        currentPortfolio += dir;
+        if (currentPortfolio < 0) currentPortfolio = totalPortfolio - 1;
+        if (currentPortfolio >= totalPortfolio) currentPortfolio = 0;
+        track.style.transform = `translateX(-${currentPortfolio * 100}%)`;
+    }
+
+    // ========== HEADER OCULTAR AL SCROLL ==========
+    let lastScrollY = 0;
+    const header = document.getElementById('mainHeader');
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+        if (currentScroll > lastScrollY && currentScroll > 80) {
+            header.style.transform = 'translateY(-100%)';
+        } else {
+            header.style.transform = 'translateY(0)';
         }
-
-        // ========== HEADER OCULTAR AL SCROLL ==========
-        let lastScroll = 0;
-        const header = document.getElementById("mainHeader");
-        window.addEventListener("scroll", () => {
-            let currentScroll = window.pageYOffset;
-            if (currentScroll > lastScroll && currentScroll > 50) {
-                header.style.transform = "translateY(-100%)";
-            } else {
-                header.style.transform = "translateY(0)";
-            }
-            lastScroll = currentScroll;
-        });
-    </script>
+        lastScrollY = currentScroll;
+    });
+</script>
 </body>
 </html>
